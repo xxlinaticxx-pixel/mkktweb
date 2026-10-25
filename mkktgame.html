@@ -1,133 +1,118 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="robots" content="noindex,noarchive,nofollow,noimageindex">
-  <meta name="viewport" content="width=device-width">
-  <title>ON-OFF</title>
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/fuwaimg.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/jquery.js"></script>
-  <script src="js/common.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho&display=swap" rel="stylesheet">
-  <style>
-.description{
-    text-align:center;
-    margin-bottom:30px;
-    color:#ccc;
-}
-
-.game{
-    width:100%;
-    aspect-ratio:16/9;
-}
-
-.game iframe{
-    width:100%;
-    height:100%;
-    border:none;
-}
-
-.info{
-    margin-top:30px;
-    background:#eee;
-    padding:20px;
-    border-radius:10px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>有線接続って愛の証明ですよね！？｜マクカト短編ゲーム</title>
+<style>
+:root{--pink:#ef8fb0;--pink-dark:#ce5e88;--pale:#fff0f6;--lav:#f0ecff;--cream:#fffaf8;--ink:#584957;--muted:#968493;--line:#f1d9e3;--white:#fff}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.75;background:radial-gradient(circle at 8% 8%,#f8dbe8 0 2px,transparent 3px),radial-gradient(circle at 91% 21%,#e7e0ff 0 3px,transparent 4px),var(--cream);background-size:35px 35px,47px 47px,auto}
+a{color:var(--pink-dark);text-underline-offset:3px}
+.topbar{padding:9px 16px;text-align:center;background:var(--pink-dark);color:#fff;font-size:12px;letter-spacing:.08em}
+header{background:#ffffffeb;border-bottom:1px solid var(--line)}
+.header-inner{max-width:980px;margin:auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:47px;height:47px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(135deg,#ffcada,#e6deff);font-size:25px;box-shadow:0 5px 13px #e8a4bd44}
+.brand-title{font-weight:900;font-size:19px;line-height:1.4}
+.brand-sub{font-size:10px;letter-spacing:.12em;color:var(--muted)}
+.pill{border:1px solid var(--line);border-radius:999px;background:var(--pale);color:var(--pink-dark);font-size:11px;padding:6px 12px;white-space:nowrap}
+main{max-width:900px;margin:auto;padding:28px 18px 52px}
+.hero{position:relative;overflow:hidden;padding:28px;border:1px solid #f2d0df;border-radius:25px;background:linear-gradient(120deg,#fff0f6,#fff 58%,#f0edff);box-shadow:0 10px 28px #b77a8d12}
+.hero:after{content:"♡";position:absolute;right:22px;top:-23px;font-size:125px;line-height:1;color:#f5bad0;opacity:.6;pointer-events:none}
+.eyebrow{display:inline-block;border:1px solid #f4d1df;background:#fff;border-radius:999px;padding:3px 11px;color:var(--pink-dark);font-size:11px;font-weight:800;letter-spacing:.08em}
+h1{position:relative;z-index:1;margin:12px 0 9px;font-size:clamp(25px,5vw,36px);line-height:1.4}
+.accent{color:var(--pink-dark)}
+.hero p{position:relative;z-index:1;margin:0;color:#887787;font-size:14px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;position:relative;z-index:1}
+.btn{display:inline-block;text-decoration:none;border-radius:12px;padding:9px 15px;font-size:12px;font-weight:800}
+.btn-primary{background:var(--pink-dark);color:#fff;box-shadow:0 4px 0 #b94b73}
+.btn-soft{background:#fff;border:1px solid var(--line);color:var(--pink-dark)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:27px 2px 12px}
+h2{margin:0;font-size:20px}
+.caption{font-size:11px;color:var(--muted)}
+.game-shell{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 8px 24px #b77a8d12}
+.game-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 17px;background:#fff5f9;border-bottom:1px solid var(--line)}
+.game-label{font-weight:900;font-size:13px}
+.game-hint{font-size:11px;color:var(--muted)}
+.game-frame-wrap{background:#f8f5fa;padding:12px}
+.game-frame{display:block;width:100%;height:650px;border:1px solid #eadde8;border-radius:12px;background:#fff}
+.game-fallback{padding:15px;text-align:center;font-size:12px;color:var(--muted)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:19px;padding:19px 20px;box-shadow:0 6px 17px #b77a8d0b}
+.panel h2{font-size:17px;margin-bottom:10px}
+.panel p{font-size:13px;margin:0;color:#786b79}
+ul{margin:0;padding-left:1.25em;font-size:13px;color:#786b79}
+li+li{margin-top:4px}
+.credit-list{columns:2;column-gap:24px}
+.credit-list li{break-inside:avoid;overflow-wrap:anywhere}
+.thanks{margin-top:13px;padding:14px 17px;border-radius:15px;background:var(--lav);color:#82769d;font-size:12px}
+footer{text-align:center;padding:23px 12px;color:#b09eac;font-size:11px}
+@media(max-width:620px){
+ .header-inner{padding:14px}.brand-title{font-size:16px}.logo{width:41px;height:41px}.pill{font-size:10px;padding:5px 8px}
+ main{padding:19px 12px 38px}.hero{padding:23px 18px}.hero:after{font-size:85px;right:6px;top:-5px}
+ .section-head{align-items:start;flex-direction:column;gap:2px}.info-grid{grid-template-columns:1fr}.credit-list{columns:1}
+ .game-frame-wrap{padding:6px}.game-frame{height:580px}
 }
 </style>
 </head>
-<body id="text">
-  <header>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-        </div>
-      </div>
+<body>
+<div class="topbar">♡ プレイありがとうございます！ 感想もお待ちしています ♡</div>
+<header><div class="header-inner">
+  <div class="brand"><div class="logo">🔌</div><div><div class="brand-title">マクカト短編ゲーム</div><div class="brand-sub">SHORT GAME & LOVE STORY</div></div></div>
+  <div class="pill">✧ BROWSER GAME ✧</div>
+</div></header>
+<main>
+  <section class="hero">
+    <span class="eyebrow">♡ CYBORG LOVE STORY ♡</span>
+    <h1><span class="accent">有線接続って愛の証明ですよね！？</span></h1>
+    <p>有線接続ができないカートと一緒に、ネットレビューを見て説得しよう💕<br>画面をクリックするとゲームが始まります。ゆっくり読み込まれる場合は少しお待ちください。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://deft-jalebi-974db2.netlify.app/" target="_blank" rel="noopener">ゲームだけで遊ぶ ↗</a>
+      <a class="btn btn-soft" href="https://wavebox.me/" target="_blank" rel="noopener">プレイ報告を送る ♡</a>
     </div>
-  </header>
-<body id="text">
+  </section>
 
-  <main>
-    <div class="container">
-      <div class="row">
-
-        <div class="col-12">
-<h2 class="h2-b">マクカト短編ゲーム</h2>
-
-<p class="center">有線接続ができないカートと一緒に<br>ネットレビューを見て説得しよう💕<br>
-<br>
-プレイ報告お待ちしています❤ ▸<a href="https://wavebox.me/wave/9hanki669g6cajyk/">Wavebox</a><br>
-※モチベになるので一言やスタンプだけでもぜひ！<br>
-<br>
-ゲームのみの表示は<a href="https://deft-jalebi-974db2.netlify.app/">こちら</a>から<br>
-<br>
-
-▽画面をクリックすると始まります▽<br>
-少し重いためしばらくお待ちください！</p>
-
-<div class="game">
-<iframe
-        src="https://deft-jalebi-974db2.netlify.app/"
-        title="有線接続って愛の証明ですよね！？"
-        loading="lazy"
-        allowfullscreen>
-    </iframe>
-</div>
-<hr>
-<div class="info">
-<h2>ゲーム情報</h2>
-<ul>
-<li>プレイ時間：約10分</li>
-<li>エンディング：2種類</li>
-<li>ブラウザ推奨：Chrome</li>
-<li>PCでのプレイを想定していますがスマホでも可能です</li>
-</ul>
-<h2>クレジット</h2>
-<ul>
-<li>【素材】</li>
-<li>空想曲線　https://kopacurve.blog.fc2.com/</li>
-<li>ゲームまてりあるず　https://game-materials.com/</li>
-<li>いらすとや　https://www.irasutoya.com/</li>
-<li>OKUMONO　https://sozaino.site/</li>
-<li>サクソラまてりある　https://39sora.com/</li>
-<li>ぱたぱたアニメ館　https://pata2.jp/</li>
-<li>【音楽】</li>
-<li>魔王魂　https://maou.audio/</li>
-<li>甘茶の音楽工房　https://amachamusic.chagasi.com/</li>
-<li>もみじばミュージック　https://music.storyinvention.com/</li>
-<li>BGMer　https://bgmer.net/</li>
-<li>OtoLogic　https://otologic.jp/</li>
-</ul>
-<h2>Special Thanks</h2>
-<ul>
-<li>きもごりさん</li>
-<li>デバッグありがとうございます！</li>
-</ul>
-</div>
-<hr>
-</div> <!-- end atogaki -->
-
-  </main>
-
-
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 center">
-          <span class="sitename">ON-OFF</span>
-
-
-          <p class="bottom"><a href="https://do.gt-gt.org" target="_blank">template by do.</a></p>
-        </div>
-      </div>
+  <div class="section-head"><h2>🎮 ゲームをプレイ</h2><span class="caption">このページ内で遊べます</span></div>
+  <section class="game-shell">
+    <div class="game-top"><span class="game-label">💗 GAME START</span><span class="game-hint">クリックしてゲーム開始</span></div>
+    <div class="game-frame-wrap">
+      <iframe class="game-frame" src="https://deft-jalebi-974db2.netlify.app/" title="有線接続って愛の証明ですよね！？" loading="eager" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="game-fallback">ゲームが表示されない場合は、上の「ゲームだけで遊ぶ」から開いてね。</div>
     </div>
-  </footer>
+  </section>
 
-  <script src="js/scrollbooster.min.js" charset="utf-8"></script>
-<script src="js/fuwaimg.js" charset="utf-8"></script>
+  <div class="info-grid">
+    <section class="panel">
+      <h2>📌 ゲーム情報</h2>
+      <ul><li>プレイ時間：約10分</li><li>エンディング：2種類</li><li>推奨ブラウザ：Chrome</li><li>PCでのプレイを想定（スマホでもプレイ可能）</li></ul>
+    </section>
+    <section class="panel">
+      <h2>💌 プレイ報告お待ちしています</h2>
+      <p>遊んでくれてありがとう！ 感想やスタンプひとつだけでも、制作のモチベーションになります♡</p>
+      <div style="margin-top:13px"><a class="btn btn-primary" href="https://wavebox.me/" target="_blank" rel="noopener">Waveboxへ ↗</a></div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:13px">
+    <h2>🎀 クレジット</h2>
+    <p style="margin-bottom:9px">素材・音楽など、お借りしたもの</p>
+    <ul class="credit-list">
+      <li><a href="https://kopacurve.blog.fc2.com/" target="_blank" rel="noopener">空想曲線</a></li>
+      <li><a href="https://game-materials.com/" target="_blank" rel="noopener">ゲームまてりあるず</a></li>
+      <li><a href="https://www.irasutoya.com/" target="_blank" rel="noopener">いらすとや</a></li>
+      <li><a href="https://sozaino.site/" target="_blank" rel="noopener">OKUMONO</a></li>
+      <li><a href="https://39sora.com/" target="_blank" rel="noopener">サクソラまてりある</a></li>
+      <li><a href="https://pata2.jp/" target="_blank" rel="noopener">ぱたぱたアニメ館</a></li>
+      <li><a href="https://maou.audio/" target="_blank" rel="noopener">魔王魂</a></li>
+      <li><a href="https://music.chagasi.com/" target="_blank" rel="noopener">甘茶の音楽工房</a></li>
+      <li><a href="https://music.storyinvention.com/" target="_blank" rel="noopener">もみじばミュージック</a></li>
+      <li><a href="https://bgmer.net/" target="_blank" rel="noopener">BGMer</a></li>
+      <li><a href="https://otologic.jp/" target="_blank" rel="noopener">OtoLogic</a></li>
+    </ul>
+    <div class="thanks">Special Thanks：きもごりさん（デバッグありがとうございます！）</div>
+  </section>
+</main>
+<footer>♡ Thank you for playing! ♡</footer>
 </body>
-
 </html>
