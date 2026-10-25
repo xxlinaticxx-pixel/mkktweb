@@ -138,6 +138,68 @@ section + section {
 }
 
 /* =========================
+   WAVEBOX
+========================= */
+
+.wavebox-section {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.wavebox-card {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 26px 30px;
+    border: 1px solid #eadcde;
+    background: #fcf8f8;
+    text-align: center;
+}
+
+.wavebox-card::before {
+    content: "♥";
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 12px;
+    background: #fff;
+    color: #a82a35;
+    font-size: 16px;
+}
+
+.wavebox-message {
+    margin: 0 0 5px;
+    color: #a82a35;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.wavebox-submessage {
+    margin: 0 0 18px;
+    color: #777;
+    font-size: 12px;
+}
+
+.wavebox-button {
+    display: inline-block;
+    padding: 9px 28px;
+    border: 1px solid #a82a35;
+    background: #a82a35;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.wavebox-button:hover {
+    background: #fff;
+    color: #a82a35;
+}
+
+/* =========================
    GAME
 ========================= */
 
@@ -158,6 +220,20 @@ section + section {
     aspect-ratio: 16 / 9;
     border: 0;
     background: #000;
+}
+
+.game-section > p {
+    color: #888;
+    font-size: 12px;
+}
+
+.game-section > p a {
+    color: #a82a35;
+    text-decoration: none;
+}
+
+.game-section > p a:hover {
+    text-decoration: underline;
 }
 
 /* =========================
@@ -296,6 +372,10 @@ footer {
         padding-top: 18px;
     }
 
+    .wavebox-card {
+        padding: 24px 18px;
+    }
+
     .screenshots {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
@@ -326,6 +406,14 @@ footer {
     .screenshots {
         grid-template-columns: 1fr;
     }
+
+    .wavebox-message {
+        font-size: 14px;
+    }
+
+    .wavebox-submessage {
+        font-size: 11px;
+    }
 }
 </style>
 </head>
@@ -352,6 +440,28 @@ footer {
 
 <main class="container">
 
+    <!-- WAVEBOX -->
+    <section class="wavebox-section" id="wavebox">
+
+        <div class="wavebox-card">
+            <p class="wavebox-message">遊んでくれてありがとうございます！</p>
+
+            <p class="wavebox-submessage">
+                感想・プレイ報告などいただけると、とても嬉しいです。<br>
+                一言だけでもお気軽にどうぞ！
+            </p>
+
+            <a
+                class="wavebox-button"
+                href="https://wavebox.me/wave/9hanki669g6cajyk/"
+                target="_blank"
+                rel="noopener noreferrer">
+                ♥ Waveboxで感想を送る
+            </a>
+        </div>
+
+    </section>
+
     <!-- GAME -->
     <section class="game-section" id="game">
         <div class="section-heading">
@@ -368,7 +478,14 @@ footer {
                 allowfullscreen>
             </iframe>
         </div>
-        <p>ゲームのみの表示は<a href="https://playful-cannoli-edb5f5.netlify.app/">こちら</a>から<br></p>
+
+        <p>
+            ゲームのみの表示は
+            <a href="https://playful-cannoli-edb5f5.netlify.app/"
+               target="_blank"
+               rel="noopener noreferrer">こちら</a>
+            から
+        </p>
     </section>
 
     <!-- STORY -->
@@ -396,15 +513,21 @@ footer {
 
         <div class="screenshots">
             <div class="screenshot">
-                <div class="screenshot-placeholder"><img src="img/ss01.jpg"></div>
+                <div class="screenshot-placeholder">
+                    <img src="img/ss01.jpg">
+                </div>
             </div>
 
             <div class="screenshot">
-                <div class="screenshot-placeholder"><img src="img/ss02.jpg"></div>
+                <div class="screenshot-placeholder">
+                    <img src="img/ss02.jpg">
+                </div>
             </div>
 
             <div class="screenshot">
-                <div class="screenshot-placeholder"><img src="img/ss03.jpg"></div>
+                <div class="screenshot-placeholder">
+                    <img src="img/ss03.jpg">
+                </div>
             </div>
         </div>
     </section>
@@ -451,10 +574,6 @@ footer {
         <div class="credit">
             <p>Never,Lost Never</p>
             <p>created by on</p>
-            <p>
-                <!-- #をWaveboxの実際のURLに変更 -->
-                <a href="https://wavebox.me/wave/9hanki669g6cajyk/" target="_blank" rel="noopener noreferrer">Wavebox</a>
-            </p>
         </div>
     </section>
 
