@@ -1,125 +1,469 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="robots" content="noindex,noarchive,nofollow,noimageindex">
-  <meta name="viewport" content="width=device-width">
-  <title>ON-OFF</title>
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/fuwaimg.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/jquery.js"></script>
-  <script src="js/common.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Sawarabi+Mincho&display=swap" rel="stylesheet">
-  <style>
-.description{
-    text-align:center;
-    margin-bottom:30px;
-    color:#ccc;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Never,Lost Never</title>
+<meta name="description" content="Never,Lost Never - ブラウザで遊べるインディーゲーム">
+
+<style>
+/* =========================
+   BASE
+========================= */
+
+* {
+    box-sizing: border-box;
 }
 
-.game{
-    width:100%;
-    aspect-ratio:16/9;
+html {
+    scroll-behavior: smooth;
 }
 
-.game iframe{
-    width:100%;
-    height:100%;
-    border:none;
+body {
+    margin: 0;
+    background: #fff;
+    color: #333;
+    font-family:
+        "Noto Sans JP",
+        "Yu Gothic",
+        "Hiragino Kaku Gothic ProN",
+        sans-serif;
+    line-height: 1.8;
 }
 
-.info{
-    margin-top:30px;
-    background:#eee;
-    padding:20px;
-    border-radius:10px;
+a {
+    color: inherit;
+}
+
+.container {
+    width: min(100% - 40px, 960px);
+    margin: 0 auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    padding: 64px 20px 38px;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+    color: #222;
+    font-size: clamp(32px, 5.5vw, 58px);
+    font-weight: 400;
+    letter-spacing: 0.035em;
+    line-height: 1.3;
+}
+
+.title span {
+    color: #a82a35;
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #999;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+}
+
+/* =========================
+   ATTENTION
+========================= */
+
+.attention {
+    max-width: 650px;
+    margin: 30px auto 0;
+    padding: 16px 22px;
+    border: 1px solid #eadcde;
+    background: #fcf8f8;
+    text-align: left;
+}
+
+.attention-title {
+    margin-bottom: 6px;
+    color: #a82a35;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.attention ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #666;
+    font-size: 12px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    padding: 54px 0;
+}
+
+section + section {
+    border-top: 1px solid #eee;
+}
+
+.section-heading {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.section-number {
+    color: #a82a35;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+}
+
+.section-title {
+    margin: 0;
+    color: #222;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+}
+
+.section-subtitle {
+    color: #aaa;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+}
+
+/* =========================
+   GAME
+========================= */
+
+.game-section {
+    padding-top: 24px;
+}
+
+.game {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #e3e3e3;
+    background: #f7f7f7;
+}
+
+.game iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    background: #000;
+}
+
+/* =========================
+   STORY
+========================= */
+
+.story {
+    max-width: 720px;
+    color: #555;
+    font-size: 14px;
+}
+
+.story p {
+    margin: 0 0 14px;
+}
+
+.story p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================
+   SCREENSHOTS
+========================= */
+
+.screenshots {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.screenshot {
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+    background: #f7f7f7;
+}
+
+.screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.screenshot-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 9;
+    color: #aaa;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+
+/* =========================
+   INFORMATION
+========================= */
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+}
+
+.info-item {
+    padding: 18px;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.info-label {
+    margin-bottom: 5px;
+    color: #999;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+}
+
+.info-value {
+    color: #333;
+    font-size: 13px;
+}
+
+/* =========================
+   CREDIT
+========================= */
+
+.credit {
+    color: #666;
+    font-size: 13px;
+}
+
+.credit p {
+    margin: 0 0 7px;
+}
+
+.credit a {
+    color: #a82a35;
+    text-decoration: none;
+}
+
+.credit a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 10px;
+    padding: 24px 20px;
+    border-top: 1px solid #eee;
+    color: #aaa;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+    header {
+        padding: 46px 18px 30px;
+    }
+
+    .container {
+        width: calc(100% - 32px);
+    }
+
+    section {
+        padding: 42px 0;
+    }
+
+    .game-section {
+        padding-top: 18px;
+    }
+
+    .screenshots {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 420px) {
+    .title {
+        font-size: 32px;
+    }
+
+    .attention {
+        padding: 14px 15px;
+    }
+
+    .attention ul {
+        font-size: 11px;
+    }
+
+    .section-subtitle {
+        display: none;
+    }
+
+    .screenshots {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
-<body id="text">
-  <header>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-        </div>
-      </div>
+
+<body>
+
+<header>
+    <h1 class="title">Never<span>,</span>Lost Never</h1>
+
+    <div class="subtitle">
+        Atari x Tomas / VISUAL NOVEL
     </div>
-  </header>
-<body id="text">
 
-  <main>
-    <div class="container">
-      <div class="row">
-
-        <div class="col-12">
-<h2 class="h2-b">Never,Lost Never</h2>
-
-<p class="center">業務帰りのことだった。<br>
-  車内で他愛なく話しているとき、車体に勢いよく何かがぶつかる。<br>
-  そのまま墜落した二人はどこかの施設に投げ出された。<br>
-  かろうじて動けるアタリと、大破して動けないトーマス。<br>
-  施設内を探索してパーツを見つけ、一刻も早くトーマスを修理しなくてはならない。<br>
-  <br>
-  <strong>このゲームには以下の要素が含まれております。<br>
-  苦手な方はプレイしないでください。</strong><br>
-  捏造・死ネタ含む鬱要素・破損表現。<strong>雰囲気だけのゲーム</strong><br>
-<br>
-プレイ報告お待ちしています ▸<a href="https://wavebox.me/wave/9hanki669g6cajyk/">Wavebox</a><br>
-※モチベになるので一言やスタンプだけでもぜひ！<br>
-<br>
-ゲームのみの表示は<a href="https://playful-cannoli-edb5f5.netlify.app/">こちら</a>から<br>
-<br>
-
-▽画面をクリックすると始まります▽<br>
-少し重いためしばらくお待ちください！<br>
-<br>
-<br>
-<strong>どうしても重い場合は以下にアクセスしてみてください（アップするサーバーを変えたVerです）</strong><br>
-<a href="https://wandering-truth-780d.xxlinaticxx.workers.dev/">こちら</a>から</p>
-
-<div class="game">
-<iframe
-        src="https://playful-cannoli-edb5f5.netlify.app/"
-        title="Never,Lost Never"
-        loading="lazy"
-        allowfullscreen>
-    </iframe>
-</div>
-<hr>
-<div class="info">
-<h2>ゲーム情報</h2>
-<ul>
-<li>プレイ時間：約30分</li>
-<li>エンディング：2種類?</li>
-<li>ブラウザ推奨：Chrome</li>
-<li>PCでのプレイを想定していますがスマホでも可能です</li>
-</ul>
-
-</div>
-<hr>
-</div> <!-- end atogaki -->
-
-  </main>
-
-
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 center">
-          <span class="sitename">ON-OFF</span>
-
-
-          <p class="bottom"><a href="https://do.gt-gt.org" target="_blank">template by do.</a></p>
-        </div>
-      </div>
+    <div class="attention">
+        <div class="attention-title">ATTENTION</div>
+        <ul>
+            <li>捏造設定を含みます。</li>
+            <li>死ネタを含む鬱要素があります。</li>
+            <li>キャラクターの破損表現があります。</li>
+            <li>その他、人によっては不快に感じる可能性のある描写があります。</li>
+        </ul>
     </div>
-  </footer>
+</header>
 
-  <script src="js/scrollbooster.min.js" charset="utf-8"></script>
-<script src="js/fuwaimg.js" charset="utf-8"></script>
+<main class="container">
+
+    <!-- GAME -->
+    <section class="game-section" id="game">
+        <div class="section-heading">
+            <span class="section-number">01</span>
+            <h2 class="section-title">GAME</h2>
+            <span class="section-subtitle">PLAY</span>
+        </div>
+
+        <div class="game">
+            <iframe
+                src="https://playful-cannoli-edb5f5.netlify.app/"
+                title="Never,Lost Never ゲーム本体"
+                loading="eager"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <p>ゲームのみの表示は<a href="https://playful-cannoli-edb5f5.netlify.app/">こちら</a>から<br></p>
+    </section>
+
+    <!-- STORY -->
+    <section id="story">
+        <div class="section-heading">
+            <span class="section-number">02</span>
+            <h2 class="section-title">STORY</h2>
+            <span class="section-subtitle">ABOUT</span>
+        </div>
+
+        <div class="story">
+            <p>業務帰り、二人を乗せた車両が事故に遭う。</p>
+            <p>目を覚ましたアタリが見つけたのは、見知らぬ研究施設と、大破したトーマスだった。</p>
+            <p>トーマスを修理し、施設から脱出するため、アタリは施設内を探索する。</p>
+        </div>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section id="screenshots">
+        <div class="section-heading">
+            <span class="section-number">03</span>
+            <h2 class="section-title">SCREENSHOTS</h2>
+            <span class="section-subtitle">GALLERY</span>
+        </div>
+
+        <div class="screenshots">
+            <div class="screenshot">
+                <div class="screenshot-placeholder"><img src="img/ss01.jpg"></div>
+            </div>
+
+            <div class="screenshot">
+                <div class="screenshot-placeholder"><img src="img/ss02.jpg"></div>
+            </div>
+
+            <div class="screenshot">
+                <div class="screenshot-placeholder"><img src="img/ss03.jpg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFORMATION -->
+    <section id="information">
+        <div class="section-heading">
+            <span class="section-number">04</span>
+            <h2 class="section-title">INFORMATION</h2>
+            <span class="section-subtitle">DATA</span>
+        </div>
+
+        <div class="info">
+            <div class="info-item">
+                <div class="info-label">PLAY TIME</div>
+                <div class="info-value">約30分</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">ENDINGS</div>
+                <div class="info-value">2種類？</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">PLATFORM</div>
+                <div class="info-value">PC / Browser</div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">CP</div>
+                <div class="info-value">atari x tomas</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREDIT -->
+    <section id="credit">
+        <div class="section-heading">
+            <span class="section-number">05</span>
+            <h2 class="section-title">CREDIT</h2>
+            <span class="section-subtitle">CONTACT</span>
+        </div>
+
+        <div class="credit">
+            <p>Never,Lost Never</p>
+            <p>created by on</p>
+            <p>
+                <!-- #をWaveboxの実際のURLに変更 -->
+                <a href="https://wavebox.me/wave/9hanki669g6cajyk/" target="_blank" rel="noopener noreferrer">Wavebox</a>
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Never,Lost Never
+</footer>
+
 </body>
-
 </html>
+```
